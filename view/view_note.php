@@ -34,14 +34,12 @@ $pdfUrl = SUPABASE_URL .
 </head>
 <body style="margin:0">
 
-<!-- DEBUG: REMOVE AFTER SUCCESS -->
-<p><?= htmlspecialchars($pdfUrl) ?></p>
 
 <iframe
     src="<?= htmlspecialchars($pdfUrl) ?>"
     width="100%"
     height="100vh"
-    style="border:none">
+    style="border:none; height:100vh;">
 </iframe>
 
 </body>

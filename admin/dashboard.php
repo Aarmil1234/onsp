@@ -8,21 +8,24 @@ if (!isset($_SESSION['access_token'])) {
     exit;
 }
 
-/* ---------- FETCH COUNTS ---------- */
+/* ---------- SUPABASE GET (ADMIN) ---------- */
 function supabaseGet($endpoint) {
     $ch = curl_init(SUPABASE_URL . $endpoint);
     curl_setopt_array($ch, [
         CURLOPT_RETURNTRANSFER => true,
         CURLOPT_HTTPHEADER => [
-            "apikey: " . SUPABASE_ANON_KEY,
-            "Authorization: Bearer " . $_SESSION['access_token']
+            "apikey: " . SUPABASE_SERVICE_KEY,
+            "Authorization: Bearer " . SUPABASE_SERVICE_KEY
         ]
     ]);
     $res = curl_exec($ch);
     curl_close($ch);
-    return json_decode($res, true);
+
+    $data = json_decode($res, true);
+    return is_array($data) ? $data : [];
 }
 
+/* ---------- FETCH DATA ---------- */
 $tutors   = supabaseGet("/rest/v1/profiles?role=eq.tutor");
 $students = supabaseGet("/rest/v1/profiles?role=eq.student");
 $notes    = supabaseGet("/rest/v1/notes?select=id,view_count");
@@ -91,24 +94,18 @@ $totalViews = array_sum(array_column($notes, 'view_count'));
     <a href="create_tutor.php" class="btn btn-primary btn-sm">+ Create Tutor</a>
   </div>
 
-  <table class="table mt-3">
+  <table class="table mt-3 align-middle">
     <thead>
       <tr>
         <th>Name</th>
         <th>Email</th>
-        <th>Status</th>
       </tr>
     </thead>
     <tbody>
       <?php foreach ($tutors as $t): ?>
       <tr>
-        <td><?= $t['name'] ?></td>
-        <td><?= $t['email'] ?></td>
-        <td>
-          <span class="badge <?= $t['status']=='active'?'badge-active':'badge-inactive' ?>">
-            <?= ucfirst($t['status']) ?>
-          </span>
-        </td>
+        <td><?= htmlspecialchars($t['name'] ?? '') ?></td>
+        <td><?= htmlspecialchars($t['email'] ?? '') ?></td>
       </tr>
       <?php endforeach; ?>
     </tbody>
@@ -123,17 +120,13 @@ $totalViews = array_sum(array_column($notes, 'view_count'));
       <tr>
         <th>Name</th>
         <th>Email</th>
-        <th>Status</th>
       </tr>
     </thead>
     <tbody>
       <?php foreach (array_slice($students, 0, 5) as $s): ?>
       <tr>
-        <td><?= $s['name'] ?></td>
-        <td><?= $s['email'] ?></td>
-        <td>
-          <span class="badge badge-active">Active</span>
-        </td>
+        <td><?= htmlspecialchars($s['name'] ?? '') ?></td>
+        <td><?= htmlspecialchars($s['email'] ?? '') ?></td>
       </tr>
       <?php endforeach; ?>
     </tbody>
