@@ -1,9 +1,8 @@
-<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Login - ONSP</title>
+  <title>Student Signup</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -16,9 +15,7 @@
       --primary: #6366f1;
       --primary-dark: #4f46e5;
       --secondary: #8b5cf6;
-      --accent: #ec4899;
       --success: #10b981;
-      --danger: #ef4444;
       --dark: #0f172a;
       --gray: #64748b;
       --light-bg: #f8fafc;
@@ -39,7 +36,6 @@
       align-items: center;
       justify-content: center;
       position: relative;
-      overflow: hidden;
     }
 
     body::before {
@@ -52,22 +48,22 @@
       background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
     }
 
-    .login-container {
+    .signup-container {
       position: relative;
       z-index: 1;
       width: 100%;
-      max-width: 480px;
+      max-width: 500px;
       padding: 20px;
     }
 
-    .login-card {
+    .signup-card {
       background: white;
       border-radius: 24px;
       box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
       overflow: hidden;
     }
 
-    .login-header {
+    .signup-header {
       background: linear-gradient(135deg, var(--primary), var(--secondary));
       padding: 1rem;
       text-align: center;
@@ -75,7 +71,7 @@
       position: relative;
     }
 
-    .login-header::before {
+    .signup-header::before {
       content: '';
       position: absolute;
       top: 0;
@@ -86,12 +82,12 @@
     }
 
     .brand-logo {
-      font-size: 1rem;
+      font-size: 3rem;
       position: relative;
       z-index: 1;
     }
 
-    .login-header h2 {
+    .signup-header h2 {
       font-size: 1.8rem;
       font-weight: 800;
       margin-bottom: 0.5rem;
@@ -99,32 +95,15 @@
       z-index: 1;
     }
 
-    .login-header p {
+    .signup-header p {
       font-size: 1rem;
       opacity: 0.95;
       position: relative;
       z-index: 1;
     }
 
-    .login-body {
+    .signup-body {
       padding: 2.5rem;
-    }
-
-    .alert-modern {
-      background: rgba(239, 68, 68, 0.1);
-      border: 1px solid rgba(239, 68, 68, 0.3);
-      color: var(--danger);
-      padding: 1rem 1.2rem;
-      border-radius: 12px;
-      margin-bottom: 1.5rem;
-      font-size: 0.9rem;
-      display: flex;
-      align-items: center;
-      gap: 0.8rem;
-    }
-
-    .alert-icon {
-      font-size: 1.2rem;
     }
 
     .form-group {
@@ -139,9 +118,23 @@
       display: block;
     }
 
+    .input-group-custom {
+      position: relative;
+    }
+
+    .input-icon {
+      position: absolute;
+      left: 1.2rem;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 1.2rem;
+      color: var(--gray);
+      z-index: 1;
+    }
+
     .form-control-modern {
       width: 100%;
-      padding: 0.9rem 1.2rem;
+      padding: 0.9rem 1.2rem 0.9rem 3rem;
       border: 2px solid var(--border);
       border-radius: 12px;
       font-size: 1rem;
@@ -159,7 +152,55 @@
       color: #cbd5e1;
     }
 
-    .btn-login {
+    .password-toggle {
+      position: relative;
+    }
+
+    .password-toggle-btn {
+      position: absolute;
+      right: 1rem;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      color: var(--gray);
+      cursor: pointer;
+      font-size: 1.2rem;
+      padding: 0.3rem;
+      transition: color 0.3s;
+      z-index: 2;
+    }
+
+    .password-toggle-btn:hover {
+      color: var(--dark);
+    }
+
+    .password-strength {
+      margin-top: 0.5rem;
+      font-size: 0.8rem;
+    }
+
+    .strength-bar {
+      height: 4px;
+      background: var(--border);
+      border-radius: 2px;
+      overflow: hidden;
+      margin-bottom: 0.3rem;
+    }
+
+    .strength-fill {
+      height: 100%;
+      width: 0%;
+      transition: all 0.3s;
+      border-radius: 2px;
+    }
+
+    .strength-text {
+      color: var(--gray);
+      font-weight: 600;
+    }
+
+    .btn-signup {
       width: 100%;
       background: linear-gradient(135deg, var(--primary), var(--primary-dark));
       color: white;
@@ -173,12 +214,12 @@
       margin-top: 0.5rem;
     }
 
-    .btn-login:hover {
+    .btn-signup:hover {
       transform: translateY(-2px);
       box-shadow: 0 10px 25px rgba(99, 102, 241, 0.4);
     }
 
-    .btn-login:active {
+    .btn-signup:active {
       transform: translateY(0);
     }
 
@@ -202,20 +243,20 @@
       padding: 0 1rem;
     }
 
-    .extra-links {
+    .login-link {
       text-align: center;
-      margin-top: 1.5rem;
+      margin-top: 1rem;
     }
 
-    .extra-links a {
+    .login-link a {
       color: var(--primary);
       text-decoration: none;
       font-weight: 600;
-      font-size: 0.9rem;
+      font-size: 0.95rem;
       transition: color 0.3s;
     }
 
-    .extra-links a:hover {
+    .login-link a:hover {
       color: var(--primary-dark);
       text-decoration: underline;
     }
@@ -246,76 +287,56 @@
       transform: translateY(-2px);
     }
 
-    .password-toggle {
-      position: relative;
+    .benefits {
+      margin-top: 1.5rem;
+      padding: 1.5rem;
+      background: var(--light-bg);
+      border-radius: 12px;
     }
 
-    .password-toggle-btn {
-      position: absolute;
-      right: 1rem;
-      top: 50%;
-      transform: translateY(-50%);
-      background: none;
-      border: none;
-      color: var(--gray);
-      cursor: pointer;
-      font-size: 1.2rem;
-      padding: 0.3rem;
-      transition: color 0.3s;
-    }
-
-    .password-toggle-btn:hover {
+    .benefits-title {
+      font-weight: 700;
       color: var(--dark);
-    }
-
-    .remember-forgot {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
       margin-bottom: 1rem;
-      font-size: 0.85rem;
+      font-size: 0.9rem;
     }
 
-    .remember-me {
+    .benefit-item {
       display: flex;
       align-items: center;
-      gap: 0.5rem;
-    }
-
-    .remember-me input[type="checkbox"] {
-      width: 18px;
-      height: 18px;
-      cursor: pointer;
-      accent-color: var(--primary);
-    }
-
-    .remember-me label {
-      cursor: pointer;
+      gap: 0.8rem;
+      margin-bottom: 0.8rem;
+      font-size: 0.9rem;
       color: var(--dark);
-      font-weight: 500;
     }
 
-    .forgot-link {
-      color: var(--primary);
-      text-decoration: none;
-      font-weight: 600;
-      transition: color 0.3s;
+    .benefit-item:last-child {
+      margin-bottom: 0;
     }
 
-    .forgot-link:hover {
-      color: var(--primary-dark);
+    .benefit-icon {
+      width: 24px;
+      height: 24px;
+      background: linear-gradient(135deg, var(--success), #059669);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 0.75rem;
+      flex-shrink: 0;
     }
 
     @media (max-width: 576px) {
-      .login-header {
+      .signup-header {
         padding: 2rem 1.5rem 1.5rem;
       }
 
-      .login-header h2 {
+      .signup-header h2 {
         font-size: 1.5rem;
       }
 
-      .login-body {
+      .signup-body {
         padding: 2rem 1.5rem;
       }
 
@@ -327,79 +348,93 @@
 </head>
 <body>
 
-<div class="login-container">
-  <div class="login-card">
+<div class="signup-container">
+  <div class="signup-card">
     
     <!-- Header -->
-    <div class="login-header">
-      <img src="../assets/logo.png" alt="ONSP Logo" class="brand-logo" style="height: 130px; border-radius: 50%;">
+    <div class="signup-header">
+        <img src="../assets/logo.png" alt="ONSP Logo" class="brand-logo" style="height: 130px; border-radius: 130px">
     </div>
 
     <!-- Body -->
-    <div class="login-body">
+    <div class="signup-body">
       
-      <?php if (!empty($_SESSION['error'])): ?>
-        <div class="alert-modern">
-          <span class="alert-icon">⚠️</span>
-          <span><?= htmlspecialchars($_SESSION['error']); unset($_SESSION['error']); ?></span>
-        </div>
-      <?php endif; ?>
-
-      <form method="POST" action="login_action.php">
+      <form method="POST" action="student_signup_action.php" id="signupForm">
         
         <div class="form-group">
+          <label class="form-label">Full Name</label>
+          <div class="input-group-custom">
+            <span class="input-icon">👤</span>
+            <input 
+              type="text" 
+              name="name" 
+              class="form-control-modern" 
+              placeholder="Enter your full name" 
+              required
+              autocomplete="name"
+            >
+          </div>
+        </div>
+
+        <div class="form-group">
           <label class="form-label">Email Address</label>
-          <input 
-            type="email" 
-            name="email" 
-            class="form-control-modern" 
-            placeholder="Enter your email" 
-            required
-            autocomplete="email"
-          >
+          <div class="input-group-custom">
+            <span class="input-icon">📧</span>
+            <input 
+              type="email" 
+              name="email" 
+              class="form-control-modern" 
+              placeholder="Enter your email" 
+              required
+              autocomplete="email"
+            >
+          </div>
         </div>
 
         <div class="form-group">
           <label class="form-label">Password</label>
           <div class="password-toggle">
-            <input 
-              type="password" 
-              name="password" 
-              id="password"
-              class="form-control-modern" 
-              placeholder="Enter your password" 
-              required
-              autocomplete="current-password"
-            >
-            <button 
-              type="button" 
-              class="password-toggle-btn" 
-              onclick="togglePassword()"
-              id="toggleBtn"
-            >
-              👁️
-            </button>
+            <div class="input-group-custom">
+              <span class="input-icon">🔒</span>
+              <input 
+                type="password" 
+                name="password" 
+                id="password"
+                class="form-control-modern" 
+                placeholder="Create a strong password" 
+                required
+                autocomplete="new-password"
+                oninput="checkPasswordStrength()"
+              >
+              <button 
+                type="button" 
+                class="password-toggle-btn" 
+                onclick="togglePassword()"
+                id="toggleBtn"
+              >
+                👁️
+              </button>
+            </div>
+          </div>
+          <div class="password-strength" id="passwordStrength" style="display: none;">
+            <div class="strength-bar">
+              <div class="strength-fill" id="strengthFill"></div>
+            </div>
+            <div class="strength-text" id="strengthText"></div>
           </div>
         </div>
 
-        <div class="remember-forgot">
-          <div class="remember-me">
-            <input type="checkbox" id="remember" name="remember">
-            <label for="remember">Remember me</label>
-          </div>
-          <a href="#" class="forgot-link">Forgot Password?</a>
-        </div>
-
-        <button type="submit" class="btn-login">Login</button>
+        <button type="submit" class="btn-signup">Create Free Account</button>
       </form>
 
       <div class="divider">
-        <span>Don't have an account?</span>
+        <span>Already have an account?</span>
       </div>
 
-      <div class="extra-links">
-        <a href="register.php">Create a free account →</a>
+      <div class="login-link">
+        <a href="login.php">Sign in to your account →</a>
       </div>
+
 
     </div>
   </div>
@@ -418,6 +453,50 @@ function togglePassword() {
     passwordInput.type = 'password';
     toggleBtn.textContent = '👁️';
   }
+}
+
+function checkPasswordStrength() {
+  const password = document.getElementById('password').value;
+  const strengthDiv = document.getElementById('passwordStrength');
+  const strengthFill = document.getElementById('strengthFill');
+  const strengthText = document.getElementById('strengthText');
+  
+  if (password.length === 0) {
+    strengthDiv.style.display = 'none';
+    return;
+  }
+  
+  strengthDiv.style.display = 'block';
+  
+  let strength = 0;
+  let text = '';
+  let color = '';
+  
+  // Length check
+  if (password.length >= 8) strength += 25;
+  if (password.length >= 12) strength += 25;
+  
+  // Character variety checks
+  if (/[a-z]/.test(password)) strength += 15;
+  if (/[A-Z]/.test(password)) strength += 15;
+  if (/[0-9]/.test(password)) strength += 10;
+  if (/[^a-zA-Z0-9]/.test(password)) strength += 10;
+  
+  if (strength < 40) {
+    text = 'Weak';
+    color = '#ef4444';
+  } else if (strength < 70) {
+    text = 'Medium';
+    color = '#f59e0b';
+  } else {
+    text = 'Strong';
+    color = '#10b981';
+  }
+  
+  strengthFill.style.width = strength + '%';
+  strengthFill.style.background = color;
+  strengthText.textContent = text;
+  strengthText.style.color = color;
 }
 </script>
 
