@@ -591,10 +591,10 @@ $totalViews = array_sum(array_column($notes, 'view_count'));
                 <a href="../preview.php?id=<?= $note['id'] ?>" class="btn-action view" title="View">
                   👁️
                 </a>
-                <a href="edit.php?id=<?= $note['id'] ?>" class="btn-action edit" title="Edit">
+                <a href="edit_note.php?id=<?= $note['id'] ?>" class="btn-action edit" title="Edit">
                   ✏️
                 </a>
-                <a href="delete.php?id=<?= $note['id'] ?>" 
+                <a href="delete_note.php?id=<?= $note['id'] ?>" 
                    class="btn-action delete" 
                    title="Delete"
                    onclick="return confirm('Are you sure you want to delete this note?')">
